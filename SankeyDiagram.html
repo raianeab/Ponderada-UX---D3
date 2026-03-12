@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Sankey Recursos</title>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+
+<style>
+
+body{
+font-family:Arial;
+}
+
+#chart{
+width:1100px;
+height:650px;
+margin:auto;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="chart"></div>
+
+<script>
+
+const chart = echarts.init(document.getElementById("chart"));
+
+const option = {
+
+tooltip:{
+trigger:"item"
+},
+
+series:[{
+
+type:"sankey",
+
+nodeWidth:25,
+nodeGap:18,
+
+lineStyle:{
+curveness:0.5
+},
+
+data:[
+
+{name:"Rastreador", depth:0},
+
+{name:"Aéreos", depth:1},
+{name:"Brigadistas", depth:1},
+{name:"Veículos", depth:1},
+
+{name:"Avião", depth:2},
+{name:"Helicóptero", depth:2},
+
+{name:"Brigadista Fixo", depth:2},
+{name:"Brigadista Spot", depth:2},
+
+{name:"Veículo Pipa Fixo", depth:2},
+{name:"Veículo Spot", depth:2},
+{name:"Veículo 4x2", depth:2},
+{name:"Veículo Multiuso", depth:2},
+{name:"Veículo 4x4", depth:2},
+
+{name:"UP1", depth:3},
+{name:"UP2", depth:3},
+{name:"UP3", depth:3},
+{name:"UP4", depth:3},
+{name:"UP5", depth:3}
+
+],
+
+links:[
+
+/* RASTREADOR */
+
+{
+source:"Rastreador",
+target:"Aéreos",
+value:50,
+lineStyle:{color:"#3498db"}
+},
+
+{
+source:"Rastreador",
+target:"Brigadistas",
+value:120,
+lineStyle:{color:"#e74c3c"}
+},
+
+{
+source:"Rastreador",
+target:"Veículos",
+value:100,
+lineStyle:{color:"#2ecc71"}
+},
+
+/* AEREOS */
+
+{
+source:"Aéreos",
+target:"Avião",
+value:30,
+lineStyle:{color:"#3498db"}
+},
+
+{
+source:"Aéreos",
+target:"Helicóptero",
+value:20,
+lineStyle:{color:"#3498db"}
+},
+
+/* BRIGADISTAS */
+
+{
+source:"Brigadistas",
+target:"Brigadista Fixo",
+value:70,
+lineStyle:{color:"#e74c3c"}
+},
+
+{
+source:"Brigadistas",
+target:"Brigadista Spot",
+value:50,
+lineStyle:{color:"#e74c3c"}
+},
+
+/* VEICULOS */
+
+{
+source:"Veículos",
+target:"Veículo Pipa Fixo",
+value:30,
+lineStyle:{color:"#2ecc71"}
+},
+
+{
+source:"Veículos",
+target:"Veículo Spot",
+value:20,
+lineStyle:{color:"#2ecc71"}
+},
+
+{
+source:"Veículos",
+target:"Veículo 4x2",
+value:15,
+lineStyle:{color:"#2ecc71"}
+},
+
+{
+source:"Veículos",
+target:"Veículo Multiuso",
+value:20,
+lineStyle:{color:"#2ecc71"}
+},
+
+{
+source:"Veículos",
+target:"Veículo 4x4",
+value:15,
+lineStyle:{color:"#2ecc71"}
+},
+
+/* UPS */
+
+/* AEREOS */
+
+{
+source:"Avião",
+target:"UP1",
+value:15,
+lineStyle:{color:"#3498db"}
+},
+
+{
+source:"Avião",
+target:"UP2",
+value:15,
+lineStyle:{color:"#3498db"}
+},
+
+{
+source:"Helicóptero",
+target:"UP3",
+value:10,
+lineStyle:{color:"#3498db"}
+},
+
+{
+source:"Helicóptero",
+target:"UP4",
+value:10,
+lineStyle:{color:"#3498db"}
+},
+
+/* BRIGADISTAS */
+
+{
+source:"Brigadista Fixo",
+target:"UP1",
+value:35,
+lineStyle:{color:"#e74c3c"}
+},
+
+{
+source:"Brigadista Fixo",
+target:"UP2",
+value:35,
+lineStyle:{color:"#e74c3c"}
+},
+
+{
+source:"Brigadista Spot",
+target:"UP4",
+value:25,
+lineStyle:{color:"#e74c3c"}
+},
+
+{
+source:"Brigadista Spot",
+target:"UP5",
+value:25,
+lineStyle:{color:"#e74c3c"}
+},
+
+/* VEICULOS */
+
+{
+source:"Veículo Pipa Fixo",
+target:"UP1",
+value:30,
+lineStyle:{color:"#2ecc71"}
+},
+
+{
+source:"Veículo Spot",
+target:"UP2",
+value:20,
+lineStyle:{color:"#2ecc71"}
+},
+
+{
+source:"Veículo 4x2",
+target:"UP3",
+value:15,
+lineStyle:{color:"#2ecc71"}
+},
+
+{
+source:"Veículo Multiuso",
+target:"UP4",
+value:20,
+lineStyle:{color:"#2ecc71"}
+},
+
+{
+source:"Veículo 4x4",
+target:"UP5",
+value:15,
+lineStyle:{color:"#2ecc71"}
+}
+
+]
+
+}]
+
+};
+
+chart.setOption(option);
+
+</script>
+
+</body>
+
+</html>
