@@ -33,6 +33,20 @@ text{
 font-size:14px;
 }
 
+/* TOOLTIP */
+
+.tooltip{
+position:absolute;
+background:white;
+border:1px solid #ccc;
+padding:6px 10px;
+border-radius:4px;
+font-size:13px;
+pointer-events:none;
+opacity:0;
+box-shadow:0 2px 6px rgba(0,0,0,0.2);
+}
+
 </style>
 
 </head>
@@ -41,10 +55,14 @@ font-size:14px;
 
 <div id="chart"></div>
 
+<div class="tooltip" id="tooltip"></div>
+
 <script>
 
 const width = window.innerWidth
 const height = window.innerHeight
+
+const tooltip = d3.select("#tooltip")
 
 const svg = d3.select("#chart")
 .append("svg")
@@ -81,7 +99,7 @@ const nodes = [
 
 ]
 
-/* CORES DAS CATEGORIAS */
+/* CORES */
 
 const colorMap = {
 
@@ -142,12 +160,12 @@ const links = [
 
 ]
 
-/* MAPA DE INDICES */
+/* MAPA INDICES */
 
 const nodeIndex={}
 nodes.forEach((d,i)=>nodeIndex[d.name]=i)
 
-/* CONVERTER LINKS */
+/* LINKS CONVERTIDOS */
 
 const graphLinks = links.map(d=>{
 
@@ -174,7 +192,7 @@ nodes:nodes.map(d=>Object.assign({},d)),
 links:graphLinks.map(d=>Object.assign({},d))
 })
 
-/* DESENHAR LINKS */
+/* LINKS */
 
 svg.append("g")
 .selectAll("path")
@@ -186,7 +204,32 @@ svg.append("g")
 .attr("stroke",d=>d.color)
 .attr("stroke-width",d=>Math.max(1,d.width))
 
-/* DESENHAR NODES */
+.on("mouseover",(event,d)=>{
+
+tooltip
+.style("opacity",1)
+.html(
+"<b>"+d.source.name+" → "+d.target.name+"</b><br>"+
+"Valor: "+d.value
+)
+
+})
+
+.on("mousemove",(event)=>{
+
+tooltip
+.style("left",(event.pageX+15)+"px")
+.style("top",(event.pageY+10)+"px")
+
+})
+
+.on("mouseout",()=>{
+
+tooltip.style("opacity",0)
+
+})
+
+/* NODES */
 
 const node = svg.append("g")
 .selectAll("g")
