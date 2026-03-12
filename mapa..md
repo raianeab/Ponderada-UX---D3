@@ -180,18 +180,18 @@
 ```
 
 
-#Estrutura básica do HTML
+# Estrutura básica do HTML
 - O documento é em HTML5
 - O lang="pt-br" indica que a página está em português brasileiro
 
-#Cabeçalho (head)
+# Cabeçalho (head)
 - charset="UTF-8" permite acentuação
 - title nomeia a aba
 
-#Bibliotecas externas
+# Bibliotecas externas
 - Importa as bibliotecas d3(desenha mapas, cria gráficos e manipula svg) e TopoJSON(leitura de mapas compactados)
 
-#CSS (estilo visual)
+# CSS (estilo visual)
 - body centraliza tudo, usa fonte simples e define o fundo como cinza
 - "#mapa" define o fundo do mapa como azul claro para simular o oceano
 - .municipio preenche os municípios com a cor branca e cria linhas finas cinzas
@@ -199,23 +199,23 @@
 - .ponto cria círculos que representam o monitoramento
 - .controls define a posição dos botões + e -
 
-#body (corpo da página)
+# body (corpo da página)
 - Define o título como "Monitoramento Brasil"
 - div guarda loading, botões, legenda e mapa
 
-#Tela de carregamento
+# Tela de carregamento
 - Exibe mensagem enquanto os dados do mapa são baixados
 
-#Botões
+# Botões
 - Aproxima e afasta o mapa
 
-#Legenda
+# Legenda
 - Mostra a lengenda das cores do mapa (vermelho = alto, laranja = médio, amarelo = baixo)
 
-#Área do mapa
+# Área do mapa
 - Cria o mapa SVG a partir do d3
 
-#Javascript
+# Javascript
 - width e height definem as dimensões do mapa
 - SVG é usado para desenhar mapas e gráficos
 - As 3 camadas dividem o mapa por cidades, estados e eventos
