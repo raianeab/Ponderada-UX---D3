@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<div>
+  <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -176,3 +177,4 @@
     </script>
 </body>
 </html>
+</div>
