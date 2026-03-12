@@ -178,3 +178,58 @@
 </body>
 </html>
 ```
+
+
+#Estrutura básica do HTML
+- O documento é em HTML5
+- O lang="pt-br" indica que a página está em português brasileiro
+
+#Cabeçalho (head)
+- charset="UTF-8" permite acentuação
+- title nomeia a aba
+
+#Bibliotecas externas
+- Importa as bibliotecas d3(desenha mapas, cria gráficos e manipula svg) e TopoJSON(leitura de mapas compactados)
+
+#CSS (estilo visual)
+- body centraliza tudo, usa fonte simples e define o fundo como cinza
+- "#mapa" define o fundo do mapa como azul claro para simular o oceano
+- .municipio preenche os municípios com a cor branca e cria linhas finas cinzas
+- .estado escurece as bordas e divide os estados
+- .ponto cria círculos que representam o monitoramento
+- .controls define a posição dos botões + e -
+
+#body (corpo da página)
+- Define o título como "Monitoramento Brasil"
+- div guarda loading, botões, legenda e mapa
+
+#Tela de carregamento
+- Exibe mensagem enquanto os dados do mapa são baixados
+
+#Botões
+- Aproxima e afasta o mapa
+
+#Legenda
+- Mostra a lengenda das cores do mapa (vermelho = alto, laranja = médio, amarelo = baixo)
+
+#Área do mapa
+- Cria o mapa SVG a partir do d3
+
+#Javascript
+- width e height definem as dimensões do mapa
+- SVG é usado para desenhar mapas e gráficos
+- As 3 camadas dividem o mapa por cidades, estados e eventos
+- projection transforma x e y em longitude e latitude
+- path converte os dados geográficos em desenhos SVG
+- dadosPontos define as posições dos círculos
+- zoomBehavior permite zoom até 50x com scroll e arrastar o mapa
+- A camada dos municípios aparecem quando o zoom é maior que 3
+- stroke-width evita que as linhas fiquem grossas no zoom
+- svg.call ativa o zoom
+- d3.select faz os botões controlarem o zoom
+- d3.json baixa o mapa em GeoJSON
+- camadaEstados.selectAll("path") cria paths SVG para cada estado
+- camadaMunicipios.selectAll("path") transforma cada município em path no SVG
+- .append("title") e .text(...) mostra textos ao passar o mouse por cima
+- camadaPontos.selectAll("circle") cria os círculos no mapa
+- .attr("cx", d => projection([d.lon, d.lat])[0]) e .attr("cy", d => projection([d.lon, d.lat])[1]) transforma longitude e latitude em x e y
