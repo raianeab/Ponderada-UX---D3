@@ -1,5 +1,8 @@
 # Visualização de Fluxo de Recursos para Combate a Incêndios com D3 (Sankey)
 
+# Autores
+- João Furtado
+- Luiz Oliveira
 ## 📌 Descrição do Projeto
 
 Este projeto implementa uma visualização interativa de fluxo de recursos
