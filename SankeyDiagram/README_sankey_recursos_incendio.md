@@ -3,7 +3,7 @@
 # Autores
 - João Furtado
 - Luiz Oliveira
-## 📌 Descrição do Projeto
+## Descrição do Projeto
 
 Este projeto implementa uma visualização interativa de fluxo de recursos
 utilizando o modelo Sankey com D3.js. O objetivo é representar
@@ -22,7 +22,7 @@ operacional durante ocorrências de incêndio.
 
 ------------------------------------------------------------------------
 
-# 🔥 Contexto do Problema
+# Contexto do Problema
 
 Em regiões produtivas florestais, o combate a incêndios depende de
 diferentes tipos de recursos operacionais, como aeronaves, brigadistas e
@@ -41,7 +41,7 @@ para ser representado por um grafo de fluxo Sankey.
 
 ------------------------------------------------------------------------
 
-# 📊 Estrutura da Visualização
+# Estrutura da Visualização
 
 A visualização é organizada em três níveis principais de fluxo:
 
@@ -53,7 +53,7 @@ Origem do recurso → Categoria → Subcategoria → Demanda (UP)
 
 ------------------------------------------------------------------------
 
-# 🚁 Categorias de Recursos
+# Categorias de Recursos
 
 Os recursos são organizados em três grandes grupos principais.
 
@@ -90,7 +90,7 @@ Subgrupos:
 
 ------------------------------------------------------------------------
 
-# 🔄 Fluxo de Recursos
+# Fluxo de Recursos
 
 O fluxo representado no Sankey segue a seguinte lógica:
 
@@ -143,7 +143,7 @@ Uma UP pode demandar:
 
 ------------------------------------------------------------------------
 
-# 📈 Por que usar Sankey?
+# Por que usar Sankey?
 
 O Sankey Diagram é ideal para esse tipo de problema porque ele permite
 visualizar:
@@ -165,7 +165,7 @@ Isso facilita identificar:
 
 ------------------------------------------------------------------------
 
-# 🛠️ Tecnologias Utilizadas
+# Tecnologias Utilizadas
 
 -   D3.js -- biblioteca para visualização de dados
 -   D3 Sankey -- extensão para criação de diagramas Sankey
@@ -174,7 +174,7 @@ Isso facilita identificar:
 
 ------------------------------------------------------------------------
 
-# 📊 Estrutura dos Dados
+# Estrutura dos Dados
 
 O Sankey é construído a partir de dois elementos principais:
 
@@ -204,7 +204,7 @@ recursos.
 
 ------------------------------------------------------------------------
 
-# 🎯 Objetivo da Ferramenta
+# Objetivo da Ferramenta
 
 A visualização busca apoiar:
 

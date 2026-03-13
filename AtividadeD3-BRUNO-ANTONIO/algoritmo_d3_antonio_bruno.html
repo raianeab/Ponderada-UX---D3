@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
+<style>
+
+body{
+margin:0;
+background:#0f1724;
+font-family:Arial;
+color:white;
+overflow:hidden;
+}
+
+svg{
+width:100vw;
+height:100vh;
+}
+
+.node{
+stroke:white;
+stroke-width:2;
+}
+
+.source{ fill:#2ecc71 }
+.sink{ fill:#3498db }
+.tracker{ fill:#f39c12 }
+.ups{ fill:#e74c3c }
+
+.link{
+stroke:#888;
+stroke-width:2;
+}
+
+.active{
+stroke:#00ffff;
+stroke-width:5;
+}
+
+.label{
+fill:white;
+font-size:13px;
+}
+
+#panel{
+position:absolute;
+top:20px;
+left:20px;
+background:white;
+color:black;
+padding:15px;
+border-radius:6px;
+width:320px;
+}
+
+button{
+padding:6px 12px;
+margin-bottom:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="panel">
+
+<b>Simulação Min-Cost Flow</b>
+
+<br><br>
+
+<button onclick="nextStep()">Próximo passo</button>
+
+<div id="info"></div>
+
+</div>
+
+<svg></svg>
+
+<script>
+
+const width = window.innerWidth
+const height = window.innerHeight
+
+const svg = d3.select("svg")
+const graph = svg.append("g")
+
+// NÓS
+
+const nodes=[
+
+{id:"s",type:"source",x:width/2,y:80},
+
+{id:"T1",type:"tracker",x:width/3,y:230,supply:3},
+{id:"T2",type:"tracker",x:width/2,y:230,supply:3},
+{id:"T3",type:"tracker",x:2*width/3,y:230,supply:3},
+
+{id:"U1",type:"ups",x:width/3,y:420,demand:3},
+{id:"U2",type:"ups",x:2*width/3,y:420,demand:2},
+
+{id:"t",type:"sink",x:width/2,y:600}
+
+]
+
+// ARESTAS
+
+const links=[
+
+{source:"s",target:"T1",id:"e1"},
+{source:"s",target:"T2",id:"e2"},
+{source:"s",target:"T3",id:"e3"},
+
+{source:"T1",target:"U1",cost:4,id:"e4"},
+{source:"T2",target:"U1",cost:2,id:"e5"},
+{source:"T3",target:"U1",cost:5,id:"e6"},
+
+{source:"T1",target:"U2",cost:6,id:"e7"},
+{source:"T2",target:"U2",cost:4,id:"e8"},
+{source:"T3",target:"U2",cost:1,id:"e9"},
+
+{source:"U1",target:"t",capacity:3,id:"e10"},
+{source:"U2",target:"t",capacity:2,id:"e11"}
+
+]
+
+const nodeMap={}
+nodes.forEach(n=>nodeMap[n.id]=n)
+
+// PASSOS DO ALGORITMO
+
+const steps=[
+
+{
+path:["e2","e5","e10"],
+flow:3,
+text:"Menor caminho encontrado: s → T2 → U1 → t. U1 tinha demanda 3, então enviamos todo o fluxo necessário."
+},
+
+{
+path:["e3","e9","e11"],
+flow:2,
+text:"U1 já foi satisfeita. Agora buscamos o próximo menor caminho para U2: s → T3 → U2 → t."
+}
+
+]
+
+let stepIndex=0
+
+// DESENHAR GRAFO
+
+function drawGraph(){
+
+graph.selectAll(".link")
+.data(links)
+.enter()
+.append("line")
+.attr("class","link")
+.attr("x1",d=>nodeMap[d.source].x)
+.attr("y1",d=>nodeMap[d.source].y)
+.attr("x2",d=>nodeMap[d.target].x)
+.attr("y2",d=>nodeMap[d.target].y)
+
+graph.selectAll(".node")
+.data(nodes)
+.enter()
+.append("circle")
+.attr("class",d=>"node "+d.type)
+.attr("r",12)
+.attr("cx",d=>d.x)
+.attr("cy",d=>d.y)
+
+graph.selectAll(".label")
+.data(nodes)
+.enter()
+.append("text")
+.attr("class","label")
+.attr("x",d=>d.x+14)
+.attr("y",d=>d.y+4)
+.text(d=>{
+
+if(d.type==="tracker") return d.id+" (supply "+d.supply+")"
+if(d.type==="ups") return d.id+" (demand "+d.demand+")"
+
+return d.id
+
+})
+
+}
+
+// EXECUTAR PASSOS
+
+function nextStep(){
+
+if(stepIndex>=steps.length) return
+
+const step=steps[stepIndex]
+
+d3.select("#info").text(step.text)
+
+graph.selectAll(".link")
+.classed("active",d=>step.path.includes(d.id))
+
+animateFlow(step.path)
+
+stepIndex++
+
+}
+
+// ANIMAÇÃO DE FLUXO
+
+function animateFlow(path){
+
+path.forEach(id=>{
+
+const edge=links.find(e=>e.id===id)
+
+const s=nodeMap[edge.source]
+const t=nodeMap[edge.target]
+
+graph.append("circle")
+.attr("r",6)
+.attr("fill","yellow")
+.attr("cx",s.x)
+.attr("cy",s.y)
+.transition()
+.duration(1200)
+.attr("cx",t.x)
+.attr("cy",t.y)
+.remove()
+
+})
+
+}
+
+drawGraph()
+
+</script>
+
+</body>
+</html>
