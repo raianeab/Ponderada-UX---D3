@@ -3,6 +3,8 @@
 # Autores
 - João Furtado
 - Luiz Oliveira
+- Eduardo Santanna
+
 ## Descrição do Projeto
 
 Este projeto implementa uma visualização interativa de fluxo de recursos
